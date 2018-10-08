@@ -1,0 +1,30 @@
+<server description="CICS TG Liberty sample">
+
+   <!-- Enable features -->
+   <featureManager>
+      <feature>servlet-3.0</feature>
+      <feature>jca-1.6</feature>
+   </featureManager>
+
+   <httpEndpoint host="*" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
+
+   <!--The location of the cicseci.rar needs to be updated to the full path-->
+   <resourceAdapter autoStart="true" id="eciResourceAdapter" location="/CICS_TG_SDK_92_Unix/cicstgsdk/api/jee/runtime/managed/cicseci.rar"/>
+
+   <connectionFactory id="eciTest" jndiName="eis/ECI">
+      <!--The properties need to be updated to the location of the CICS Transaction Gateway-->
+      <!--CICSTG_IP_ADDRESS IP Address of CICS Transaction Gateway instance with which the resource adapter will communicate -->
+      <!--CICSTG_PORT_NUMBER The port on which the Gateway daemon is listening -->
+      <!--CICS_SERVER_NAME The CICSTS name defined in the CICS Transaction Gateway configuration file -->
+      <!--CICS_USER_NAME The CICS user ID to be used if no other security credentials are available -->
+      <!--CICS_USER_PASSWORD The password for the CICS user ID specified in the userName parameter. -->
+
+   <properties.eciResourceAdapter connectionUrl="tcp://<CICSTG_IP_ADDRESS>" portNumber="<CICSTG_PORT_NUMBER>" serverName='<CICS_SERVER_NAME>' socketConnectTimeout='0' userName='<CICS_USER_NAME>' password='<CICS_USER_PASSWORD>' xaSupport='off' tracelevel='1'/>
+   </connectionFactory>
+
+   <webApplication id="libertyJCA" location="/samples/libertyJCA.war" name="libertyJCA" type="war" > 
+      <classloader classProviderRef="eciResourceAdapter" />
+   </webApplication>
+   
+   <!-- logging traceSpecification="*=info" traceFileName="stdout"/ -->
+</server>
