@@ -10,6 +10,7 @@
 
    <!--The location of the cicseci.rar needs to be updated to the full path-->
    <resourceAdapter autoStart="true" id="eciResourceAdapter" location="/CICS_TG_SDK_92_Unix/cicstgsdk/api/jee/runtime/managed/cicseci.rar"/>
+   <!-- resourceAdapter autoStart="true" id="eciResourceAdapter" location="/CICS_TG_SDK_91_Unix/cicstgsdk/api/jee/runtime/managed/cicseci.rar"/ -->
 
    <connectionFactory id="eciTest" jndiName="eis/ECI">
       <!--The properties need to be updated to the location of the CICS Transaction Gateway-->
